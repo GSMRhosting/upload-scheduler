@@ -135,7 +135,7 @@ export default function App() {
   const sendNow = async () => {
     setSending(true)
     try {
-      const r = await fetch('/api/send-reminders',{method:'POST',headers:{Authorization:`Bearer ${process.env.NEXT_PUBLIC_CRON_SECRET||''}`}})
+      const r = await fetch('/api/send-reminders',{method:'POST',headers:{'Content-Type':'application/json'}})
       const d = await r.json()
       if (d.sent>0) showToast(`✅ Email sent to ${d.sent} staff member${d.sent>1?'s':''}!`)
       else showToast(d.message||'No emails sent','err')
